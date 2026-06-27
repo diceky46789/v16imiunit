@@ -89,3 +89,14 @@ function moveAudio(delta){
   if(was)setTimeout(()=>playAudio(true),250);
 }
 function setupAudioSwipe(){const el=$("audioSwipeArea");let sx=null,sy=null;el.addEventListener("touchstart",e=>{sx=e.changedTouches[0].clientX;sy=e.changedTouches[0].clientY},{passive:true});el.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.2){dx<0?moveAudio(1):moveAudio(-1);}sx=null;sy=null;},{passive:true});}
+
+
+function openInSafari(){
+  const url=location.href.replace(/#.*$/,"");
+  try{
+    window.open(url,"_blank","noopener");
+    status("audioStatus","Safariで開くための新しい画面を開きました。ホーム画面アプリで開いている場合は、Safariのブックマークから開く方法もおすすめです。","ok");
+  }catch(e){
+    status("audioStatus","Safariで開けませんでした。URLをSafariに貼り付けて開いてください。","error");
+  }
+}

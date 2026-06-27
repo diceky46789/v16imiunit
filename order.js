@@ -80,3 +80,14 @@ function moveCsvSetToFolder(setId,newFolderId){
   addSetToFolderOrder(set.folderId||ROOT_FOLDER_ID,setId);
   saveCsvSets();saveState();rebuildProblems();applyFilters();renderAll();status("folderStatus","CSVセットを移動しました。","ok");
 }
+
+
+function resetCurrentFolderOrder(){
+  const folderId=activeFolderId==="all"?ROOT_FOLDER_ID:activeFolderId;
+  const key=folderOrderKey(folderId);
+  if(!confirm("このフォルダ内のCSVセット順を追加日時の古い順に戻しますか？"))return;
+  delete state.folderOrders[key];
+  saveState();
+  rebuildProblems();applyFilters();renderAll();
+  status("folderStatus","このフォルダの順番を追加順に戻しました。","ok");
+}

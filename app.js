@@ -13,6 +13,13 @@ function migrateOldDataIfNeeded(){
   if(old&&old.length){csvSets=old.map(s=>({...s,createdAtMs:s.createdAtMs||Date.parse(s.createdAt)||Number(String(s.id||"").match(/\d{10,}/)?.[0]||Date.now())}));saveCsvSets();}
   const oldFolders=loadJson("folderState_v154",null);
   if(oldFolders&&Array.isArray(oldFolders.folders)&&!state.folders.length){state.folders=oldFolders.folders;saveState();}
+
+  const oldOrders=loadJson("folderSetOrder_v159_stable",null)||loadJson("folderSetOrder_v158",null);
+  if(oldOrders&&Object.keys(oldOrders).length&&!Object.keys(state.folderOrders||{}).length){
+    state.folderOrders=oldOrders;
+    saveState();
+  }
+
 }
 function renderAll(){renderPractice();renderFolders();updateAudioSelectors();renderList();}
 function restoreUiSettings(){
@@ -41,11 +48,11 @@ function setupEvents(){
   $("problemSlider").addEventListener("input",()=>{idx=Math.min(Math.max(Number($("problemSlider").value)-1,0),filtered.length-1);renderPractice();});
   $("excludeBtn").addEventListener("click",()=>{const p=current();if(!p)return;state.excluded[p.id]=!state.excluded[p.id];saveState();applyFilters();renderPractice();renderList();});
   document.querySelectorAll(".ratingRow button[data-rate]").forEach(b=>b.addEventListener("click",()=>{const p=current();if(!p)return;state.ratings[p.id]=Number(b.dataset.rate);saveState();next();}));
-  $("resetBtn").addEventListener("click",()=>{if(confirm("履歴をリセットしますか？")){state.ratings={};state.excluded={};saveState();applyFilters();renderPractice();renderList();}});
+  $("resetBtn").addEventListener("click",()=>{if(confirm("履歴をリセットしますか？")){state.ratings={};state.excluded={};saveState();applyFilters();renderPractice();renderList();}});$("exportBackupBtn").addEventListener("click",exportBackup);$("importBackupBtn").addEventListener("click",importBackup);
   $("importCsvBtn").addEventListener("click",importCsv);$("templateBtn").addEventListener("click",templateCsv);
-  $("addFolderBtn").addEventListener("click",addFolder);$("showAllBtn").addEventListener("click",()=>selectFolder(ROOT_FOLDER_ID));$("showUnfiledBtn").addEventListener("click",()=>selectFolder(UNFILED_FOLDER_ID));
+  $("addFolderBtn").addEventListener("click",addFolder);$("showAllBtn").addEventListener("click",()=>selectFolder(ROOT_FOLDER_ID));$("showUnfiledBtn").addEventListener("click",()=>selectFolder(UNFILED_FOLDER_ID));$("resetFolderOrderBtn").addEventListener("click",resetCurrentFolderOrder);
   $("audioSpeakJpBtn").addEventListener("click",()=>speakCurrent("jp"));$("audioSpeakEnBtn").addEventListener("click",()=>speakCurrent("en"));
-  $("audioPlayBtn").addEventListener("click",()=>audioMode?stopAudio():playAudio(false));$("audioContinuousBtn").addEventListener("click",()=>audioMode?stopAudio():playAudio(true));$("audioStopBtn").addEventListener("click",stopAudio);
+  $("audioPlayBtn").addEventListener("click",()=>audioMode?stopAudio():playAudio(false));$("audioContinuousBtn").addEventListener("click",()=>audioMode?stopAudio():playAudio(true));$("audioStopBtn").addEventListener("click",stopAudio);$("openSafariBtn").addEventListener("click",openInSafari);
   $("audioOrderBtn").addEventListener("click",()=>{audioOrder=audioOrder==="jp-en"?"en-jp":"jp-en";$("audioOrderBtn").textContent=audioOrder==="en-jp"?"順番: 英語→日本語":"順番: 日本語→英語";persistSettings();});
   $("audioFolderSelect").addEventListener("change",()=>{state.settings.audioFolder=$("audioFolderSelect").value;state.settings.audioSet="all";updateAudioSelectors();persistSettings();});
   $("audioSetSelect").addEventListener("change",persistSettings);

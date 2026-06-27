@@ -55,3 +55,57 @@ function restoreProgress(){
   if(Number.isFinite(s.idx)&&s.idx>=0&&s.idx<filtered.length){idx=s.idx;return true;}
   return false;
 }
+
+
+function exportBackup(){
+  const data={
+    version:"16.1",
+    exportedAt:new Date().toISOString(),
+    csvSets,
+    customProblems,
+    state:{
+      ratings:state.ratings,
+      excluded:state.excluded,
+      settings:state.settings,
+      folders:state.folders,
+      folderOrders:state.folderOrders,
+      lastProgress:state.lastProgress
+    }
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download="word_order_slot_backup_v16_1_"+new Date().toISOString().slice(0,10)+".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  status("backupStatus","バックアップを書き出しました。","ok");
+}
+async function importBackup(){
+  const input=$("importBackupInput");
+  if(!input.files||!input.files[0]){status("backupStatus","バックアップJSONを選択してください。","error");return;}
+  try{
+    const data=JSON.parse(await input.files[0].text());
+    if(!data||!Array.isArray(data.csvSets))throw new Error("バックアップ形式が正しくありません。");
+    if(!confirm("現在の追加CSV・フォルダ・並び順をバックアップ内容で置き換えますか？"))return;
+    csvSets=data.csvSets||[];
+    customProblems=data.customProblems||[];
+    const st=data.state||{};
+    state.ratings=st.ratings||{};
+    state.excluded=st.excluded||{};
+    state.settings=st.settings||{};
+    state.folders=Array.isArray(st.folders)?st.folders:[];
+    state.folderOrders=st.folderOrders||{};
+    state.lastProgress=st.lastProgress||null;
+    saveCsvSets();
+    saveJson("customProblems_v160",customProblems);
+    saveState();
+    rebuildProblems();setupCategories();applyFilters();idx=0;
+    renderAll();
+    status("backupStatus","バックアップを読み込みました。","ok");
+  }catch(e){
+    status("backupStatus","読み込みに失敗しました。\n"+e.message,"error");
+  }
+}
