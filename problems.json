@@ -1,0 +1,114 @@
+[
+  {
+    "id": "SCAP001",
+    "category": "肩甲下動脈系皮弁",
+    "jp": "肩甲下動脈から分岐する血管は側胸部から背部にかけての循環を司っている。",
+    "en": "The vessels branching from the subscapular artery supply the circulation from the lateral thoracic region to the back.",
+    "explanation": "英語の出現順で、主語→主語説明→述語→目的語→場所の順に練習します。",
+    "slots": [
+      {
+        "text": "The vessels",
+        "label": "主語"
+      },
+      {
+        "text": "branching from the subscapular artery",
+        "label": "主語説明"
+      },
+      {
+        "text": "supply",
+        "label": "述語"
+      },
+      {
+        "text": "the circulation",
+        "label": "目的語"
+      },
+      {
+        "text": "from the lateral thoracic region to the back",
+        "label": "場所"
+      }
+    ]
+  },
+  {
+    "id": "SCAP002",
+    "category": "肩甲下動脈系皮弁",
+    "jp": "1991年にColemanらは肩甲下動脈系を使用した遊離皮弁を報告した。",
+    "en": "In 1991, Coleman and colleagues reported a free flap based on the subscapular arterial system.",
+    "explanation": "文頭時間句が英語の先頭に来るためslot1に入れます。",
+    "slots": [
+      {
+        "text": "In 1991",
+        "label": "文頭時間句"
+      },
+      {
+        "text": "Coleman and colleagues",
+        "label": "主語"
+      },
+      {
+        "text": "reported",
+        "label": "述語"
+      },
+      {
+        "text": "a free flap based on the subscapular arterial system",
+        "label": "目的語"
+      }
+    ]
+  },
+  {
+    "id": "BASIC001",
+    "category": "基本",
+    "jp": "患者はまだ退院していない。",
+    "en": "The patient has not been discharged yet.",
+    "explanation": "現在完了否定文を英語の出現順に入力します。",
+    "slots": [
+      {
+        "text": "The patient",
+        "label": "主語"
+      },
+      {
+        "text": "has",
+        "label": "意味ユニット"
+      },
+      {
+        "text": "not",
+        "label": "述語前副詞"
+      },
+      {
+        "text": "been discharged",
+        "label": "述語"
+      },
+      {
+        "text": "yet",
+        "label": "述語後副詞"
+      }
+    ]
+  },
+  {
+    "id": "BASIC002",
+    "category": "接続文",
+    "jp": "創部は改善したが、痛みは続いた。",
+    "en": "The wound improved, but the pain continued.",
+    "explanation": "第1文→接続詞→第2文の語順で入力します。",
+    "slots": [
+      {
+        "text": "The wound",
+        "label": "第1文主語"
+      },
+      {
+        "text": "improved",
+        "label": "第1文述語"
+      },
+      {
+        "text": "but",
+        "label": "接続詞"
+      },
+      {
+        "text": "the pain",
+        "label": "第2文主語"
+      },
+      {
+        "text": "continued",
+        "label": "第2文述語"
+      }
+    ]
+  }
+]

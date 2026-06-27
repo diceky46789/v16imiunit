@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2563eb">
+<title>語順スロット英作文 v16.0</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+<header class="top">
+  <h1>語順スロット英作文 v16.0</h1>
+  <p>フォルダ・CSVセット・練習・音声再生を同じ順番管理で動かす安定版</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="practice">練習</button>
+  <button class="tab" data-tab="audio">音声再生</button>
+  <button class="tab" data-tab="folders">フォルダ</button>
+  <button class="tab" data-tab="list">一覧</button>
+  <button class="tab" data-tab="settings">設定</button>
+</nav>
+
+<main>
+<section id="practice" class="tabPage activePage">
+  <section class="card" id="practiceCard">
+    <div class="metaRow"><span id="counter">0 / 0</span><span id="tagBadge"></span></div>
+    <div class="label">日本語</div>
+    <div id="jpText" class="jpText"></div>
+    <div class="jumpPanel">
+      <div class="jumpTop"><span>問題を選ぶ</span><span id="sliderLabel">1 / 1</span></div>
+      <input id="problemSlider" type="range" min="1" max="1" value="1" step="1">
+    </div>
+    <div class="label">語順スロット</div>
+    <div id="slotArea" class="slotArea"></div>
+    <div class="buttonRow"><button id="showAnswerBtn" class="primary">答えを見る</button><button id="clearBtn">クリア</button><button id="practiceExplainBtn">解説</button></div>
+    <div id="practiceExplainBox" class="practiceExplainBox" style="display:none">
+      <div class="label">英語</div><div id="practiceEnText" class="enText"></div>
+      <div class="label">語順分解</div><div id="practiceStructureText" class="structureText"></div>
+      <div class="label">解説</div><div id="practiceExText" class="exText"></div>
+    </div>
+    <div class="buttonRow"><button id="prevBtn">前へ</button><button id="nextBtn">次へ</button><button id="speakJpBtn">日本語</button><button id="speakEnBtn">英語</button></div>
+    <div class="ratingRow"><button data-rate="1">難しい</button><button data-rate="2">もう少し</button><button data-rate="3">できた</button><button data-rate="4">簡単</button><button id="excludeBtn">除外</button></div>
+  </section>
+</section>
+
+<section id="audio" class="tabPage">
+  <section class="card" id="audioCard">
+    <div class="label">音声再生中の文</div>
+    <div id="audioNowText" class="audioNowText">再生すると、ここに読み上げ中の文が表示されます。</div>
+    <div class="audioBox" id="audioSwipeArea">
+      <div class="audioGrid">
+        <label>再生するフォルダ<select id="audioFolderSelect"></select></label>
+        <label>再生するファイル<select id="audioSetSelect"></select></label>
+      </div>
+      <div class="buttonRow">
+        <button id="audioSpeakJpBtn">日本語を再生</button>
+        <button id="audioSpeakEnBtn">英語を再生</button>
+        <button id="audioPlayBtn" class="primary">選択範囲を再生</button>
+        <button id="audioContinuousBtn">連続再生</button>
+        <button id="audioStopBtn">停止</button>
+      </div>
+      <div class="buttonRow">
+        <button id="audioOrderBtn">順番: 日本語→英語</button>
+        <label class="checkLabel"><input id="audioRepeatCheck" type="checkbox">リピート</label>
+        <label class="checkLabel"><input id="audioRandomCheck" type="checkbox">ランダム</label>
+      </div>
+      <div class="audioGrid">
+        <label>日本語スピード<input id="audioJaRate" type="range" min="0.5" max="1.2" step="0.05" value="0.85"></label>
+        <label>日本語回数<input id="audioJaCount" type="number" min="1" max="10" value="1"></label>
+        <label>英語スピード<input id="audioEnRate" type="range" min="0.5" max="1.2" step="0.05" value="0.85"></label>
+        <label>英語回数<input id="audioEnCount" type="number" min="1" max="10" value="1"></label>
+        <label>文と文の間隔（秒）<input id="audioSentenceGapSec" type="number" min="0" max="60" step="0.5" value="1"></label>
+        <label>次の問題までの間隔（秒）<input id="audioNextGapSec" type="number" min="0" max="120" step="0.5" value="2"></label>
+      </div>
+      <div id="audioStatus" class="customStatus"></div>
+      <div class="smallNote">音声再生タブは左右フリックで前後の問題へ移動できます。iPhoneでは完全なバックグラウンド再生はOS側の制限で止まることがあります。</div>
+    </div>
+  </section>
+</section>
+
+<section id="folders" class="tabPage">
+  <section class="panel">
+    <h2>フォルダ管理</h2>
+    <p class="smallNote">CSVセットの表示順はフォルダごとに保存されます。▲▼で変えた順番は、練習タブと音声再生タブにも反映されます。</p>
+    <div class="folderToolbar"><button id="showAllBtn" class="primary">すべての問題で練習</button><button id="showUnfiledBtn">未分類CSVで練習</button></div>
+    <div class="folderCreateBox">
+      <label>作成先フォルダ<select id="folderParentSelect"></select></label>
+      <label>新しいフォルダ名<input id="folderNameInput" type="text" placeholder="例：頭頸部再建、DCR、句動詞"></label>
+      <button id="addFolderBtn" class="primary">フォルダを作成</button>
+    </div>
+    <div class="folderLayout">
+      <div><div class="label">フォルダ一覧</div><div id="folderTree" class="folderTree"></div></div>
+      <div><div class="label">選択中フォルダ内のCSVセット</div><div id="folderSetList" class="csvSetList"></div></div>
+    </div>
+    <div id="folderStatus" class="customStatus"></div>
+  </section>
+</section>
+
+<section id="list" class="tabPage">
+  <section class="panel">
+    <div class="listControls">
+      <label>一覧の見方<select id="listModeSelect"><option value="labels">分類ごと</option><option value="terms">語句ごと</option></select></label>
+      <label>分類<select id="listLabelSelect"><option value="all">すべて</option></select></label>
+      <label>検索<input id="listSearch" type="search" placeholder="主語、述語、be harvested など"></label>
+    </div>
+    <div id="listStats" class="listStats"></div>
+    <div id="unitList" class="unitList"></div>
+  </section>
+</section>
+
+<section id="settings" class="tabPage">
+  <section class="panel">
+    <div class="settingsGrid">
+      <label>カテゴリ<select id="categorySelect"></select></label>
+      <label>出題順<select id="orderSelect"><option value="sequential">現在の順番</option><option value="random">ランダム</option><option value="weak">苦手優先</option><option value="excluded">除外のみ</option></select></label>
+      <label>問題検索<input id="searchInput" type="search" placeholder="退院、can、文頭副詞句 など"></label>
+      <label>ヒント段階<select id="hintLevel"><option value="0">ヒントなし</option><option value="1">slot1のみ表示</option><option value="2">slot1-2まで表示</option><option value="3">slot1-3まで表示</option><option value="all">すべて表示</option></select></label>
+      <label>日本語音声<select id="jaVoice"></select></label>
+      <label>英語音声<select id="enVoice"></select></label>
+      <label>文字サイズ<input id="fontRange" type="range" min="16" max="30" step="1" value="20"></label>
+    </div>
+
+    <div class="customBlock">
+      <h2>CSVで問題を追加</h2>
+      <p class="smallNote">CSVを読み込むたびにCSVセットとして保存されます。新しいCSVセットは、そのフォルダの末尾に追加されます。</p>
+      <label>CSVセット名<input id="csvSetNameInput" type="text" placeholder="未入力ならファイル名"></label>
+      <input id="csvFileInput" type="file" accept=".csv,text/csv">
+      <div class="buttonRow"><button id="importCsvBtn" class="primary">CSVを追加</button><button id="templateBtn">テンプレートCSV</button></div>
+      <div id="csvStatus" class="customStatus"></div>
+    </div>
+
+    <div class="customBlock">
+      <h2>履歴</h2>
+      <div class="buttonRow"><button id="resetBtn">履歴をリセット</button></div>
+    </div>
+  </section>
+</section>
+</main>
+</div>
+
+<script src="js/storage.js"></script>
+<script src="js/csv.js"></script>
+<script src="js/order.js"></script>
+<script src="js/folders.js"></script>
+<script src="js/practice.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/list.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

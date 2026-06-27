@@ -1,0 +1,73 @@
+:root{--bg:#f6f7fb;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--blue:#2563eb;--red:#dc2626}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif}
+#app{max-width:940px;margin:0 auto;padding:14px}
+.top{padding:8px 4px 10px}
+h1{margin:0;font-size:24px}.top p{margin:5px 0 0;color:var(--muted);font-size:14px;line-height:1.4}
+.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px;position:sticky;top:0;background:var(--bg);padding:6px 0;z-index:3}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 4px;font-weight:800;color:#374151}
+.tab.active{background:var(--blue);color:white;border-color:var(--blue)}
+.tabPage{display:none}.activePage{display:block}
+.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+.metaRow{display:flex;justify-content:space-between;color:var(--muted);font-size:14px;margin-bottom:10px}
+#tagBadge{background:#eef2ff;color:#3730a3;border-radius:999px;padding:4px 9px}
+.label{font-size:13px;color:var(--muted);margin:10px 0 5px}
+.jpText{font-size:28px;line-height:1.5;font-weight:900;padding:8px 0 12px}
+.jumpPanel{background:#f9fafb;border:1px solid var(--line);border-radius:16px;padding:10px;margin:6px 0 14px}
+.jumpTop{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:800;margin-bottom:6px}
+#problemSlider{width:100%;accent-color:var(--blue)}
+.slotArea{display:grid;grid-template-columns:1fr;gap:10px}
+.slotBox{border:1px solid var(--line);border-radius:16px;padding:12px;background:#fff;cursor:pointer}
+.slotBox.revealed{background:#eef6ff;border-color:rgba(37,99,235,.45)}
+.slotHeader{display:flex;justify-content:space-between;gap:8px;margin-bottom:8px}
+.slotNumber{font-weight:900;color:var(--blue)}
+.slotLabel{color:var(--muted);font-size:13px;font-weight:800}
+.tapHint{font-size:12px;color:var(--blue);font-weight:800}
+.slotAnswer{display:none;margin-top:7px;font-size:18px;font-weight:900;line-height:1.4}
+select,input,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:16px;background:#fff}
+.buttonRow,.ratingRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 14px;font-size:16px}
+.primary{background:var(--blue);color:#fff;border-color:var(--blue);font-weight:800}
+.buttonRow button,.ratingRow button{flex:1}
+#excludeBtn{color:var(--red)}
+.enText{font-size:25px;line-height:1.5;font-weight:900}
+.structureText,.exText{font-size:18px;line-height:1.7;background:#f9fafb;border-radius:12px;padding:10px;white-space:pre-wrap}
+.settingsGrid,.listControls,.audioGrid{display:grid;grid-template-columns:1fr;gap:12px}
+label{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:13px}
+.checkLabel{flex-direction:row;align-items:center;color:var(--text)}
+.checkLabel input{width:auto}
+.customBlock{border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
+.customBlock h2,.panel h2{font-size:18px;margin:0 0 8px}
+.smallNote{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 12px}
+.customStatus{font-size:14px;line-height:1.6;margin-top:10px;color:#374151;white-space:pre-wrap}
+.customStatus.error{color:#dc2626}.customStatus.ok{color:#16a34a}
+.folderToolbar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 12px}
+.folderToolbar button{flex:1}
+.folderCreateBox{display:grid;grid-template-columns:1fr;gap:10px;border:1px solid var(--line);background:#fafafa;border-radius:16px;padding:12px;margin-bottom:12px}
+.folderLayout{display:grid;grid-template-columns:1fr;gap:12px}
+.folderTree{border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:8px;max-height:65vh;overflow:auto}
+.folderNode{border:1px solid transparent;border-radius:12px;padding:8px;margin:4px 0;background:#fff}
+.folderNode.activeFolder{border-color:var(--blue);background:#eef6ff}
+.folderNodeTop{display:flex;gap:6px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.folderNameBtn{border:0;background:transparent;text-align:left;padding:5px;font-weight:900;flex:1;color:var(--text)}
+.folderSmallBtn{font-size:12px;padding:6px 8px}
+.folderChildren{margin-left:16px;border-left:2px solid var(--line);padding-left:8px}
+.csvSetList{display:grid;gap:8px;margin-top:8px}
+.csvSetItem{border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:10px}
+.csvSetTitle{display:flex;justify-content:space-between;gap:8px;font-weight:900;align-items:center}
+.csvSetMeta{font-size:13px;color:var(--muted);margin-top:4px}
+.csvSetActions,.csvOrderButtons,.folderSetMove{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.csvOrderButtons button{flex:1;font-weight:800}
+.csvOrderButtons button:disabled{opacity:.35}
+.folderSetMove{display:grid;grid-template-columns:1fr auto;align-items:end}
+.audioNowText{font-size:22px;line-height:1.6;font-weight:900;background:#f9fafb;border-radius:16px;padding:12px;min-height:90px}
+.audioBox{border:1px solid var(--line);background:#fafafa;border-radius:16px;padding:12px;margin:12px 0;touch-action:pan-y}
+.readingLabel{font-size:13px;color:var(--muted);font-weight:800;margin-bottom:6px}
+.listStats{font-size:14px;color:var(--muted);margin:10px 0}
+.unitList{display:grid;gap:8px;max-height:70vh;overflow:auto;padding-right:4px}
+.unitItem{border:1px solid var(--line);border-radius:14px;padding:10px;background:#fafafa}
+.unitTitle{display:flex;justify-content:space-between;gap:8px;font-weight:900;font-size:17px}
+.unitCount{color:var(--muted);font-size:13px;white-space:nowrap}
+.exampleItem{border-top:1px dashed var(--line);padding-top:7px;margin-top:8px}
+.exampleJp{font-weight:800}.exampleEn{color:#1f2937;margin-top:3px}
+@media(min-width:760px){.slotArea{grid-template-columns:1fr 1fr}.settingsGrid,.listControls,.audioGrid{grid-template-columns:1fr 1fr}.folderCreateBox{grid-template-columns:1fr 1fr auto}.folderLayout{grid-template-columns:1fr 1fr}.jpText{font-size:30px}}
