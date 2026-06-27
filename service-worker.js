@@ -1,4 +1,4 @@
-const CACHE='word-order-slot-v16-0-modular';
+const CACHE='word-order-slot-v16-1-modular-plus';
 const FILES=[
  './','./index.html','./style.css','./manifest.json','./problems.json',
  './js/storage.js','./js/csv.js','./js/order.js','./js/folders.js',

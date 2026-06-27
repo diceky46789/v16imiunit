@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#2563eb">
-<title>語順スロット英作文 v16.0</title>
+<title>語順スロット英作文 v16.1</title>
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
 <header class="top">
-  <h1>語順スロット英作文 v16.0</h1>
-  <p>フォルダ・CSVセット・練習・音声再生を同じ順番管理で動かす安定版</p>
+  <h1>語順スロット英作文 v16.1</h1>
+  <p>順番管理を一本化した安定版＋バックアップ・復元対応</p>
 </header>
 
 <nav class="tabs">
@@ -61,6 +61,7 @@
         <button id="audioPlayBtn" class="primary">選択範囲を再生</button>
         <button id="audioContinuousBtn">連続再生</button>
         <button id="audioStopBtn">停止</button>
+        <button id="openSafariBtn">Safariで開く</button>
       </div>
       <div class="buttonRow">
         <button id="audioOrderBtn">順番: 日本語→英語</button>
@@ -85,7 +86,7 @@
   <section class="panel">
     <h2>フォルダ管理</h2>
     <p class="smallNote">CSVセットの表示順はフォルダごとに保存されます。▲▼で変えた順番は、練習タブと音声再生タブにも反映されます。</p>
-    <div class="folderToolbar"><button id="showAllBtn" class="primary">すべての問題で練習</button><button id="showUnfiledBtn">未分類CSVで練習</button></div>
+    <div class="folderToolbar"><button id="showAllBtn" class="primary">すべての問題で練習</button><button id="showUnfiledBtn">未分類CSVで練習</button><button id="resetFolderOrderBtn">このフォルダの順番を追加順に戻す</button></div>
     <div class="folderCreateBox">
       <label>作成先フォルダ<select id="folderParentSelect"></select></label>
       <label>新しいフォルダ名<input id="folderNameInput" type="text" placeholder="例：頭頸部再建、DCR、句動詞"></label>
@@ -130,6 +131,16 @@
       <input id="csvFileInput" type="file" accept=".csv,text/csv">
       <div class="buttonRow"><button id="importCsvBtn" class="primary">CSVを追加</button><button id="templateBtn">テンプレートCSV</button></div>
       <div id="csvStatus" class="customStatus"></div>
+    </div>
+
+
+    <div class="customBlock">
+      <h2>データのバックアップ・復元</h2>
+      <p class="smallNote">追加したCSVセット、フォルダ、並び順、評価、除外設定をJSONファイルとして保存・復元できます。</p>
+      <div class="buttonRow"><button id="exportBackupBtn" class="primary">バックアップを書き出す</button></div>
+      <input id="importBackupInput" type="file" accept=".json,application/json">
+      <div class="buttonRow"><button id="importBackupBtn">バックアップを読み込む</button></div>
+      <div id="backupStatus" class="customStatus"></div>
     </div>
 
     <div class="customBlock">

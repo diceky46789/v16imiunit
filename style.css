@@ -71,3 +71,6 @@ label{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:13
 .exampleItem{border-top:1px dashed var(--line);padding-top:7px;margin-top:8px}
 .exampleJp{font-weight:800}.exampleEn{color:#1f2937;margin-top:3px}
 @media(min-width:760px){.slotArea{grid-template-columns:1fr 1fr}.settingsGrid,.listControls,.audioGrid{grid-template-columns:1fr 1fr}.folderCreateBox{grid-template-columns:1fr 1fr auto}.folderLayout{grid-template-columns:1fr 1fr}.jpText{font-size:30px}}
+
+
+#importBackupInput{margin-top:8px}
